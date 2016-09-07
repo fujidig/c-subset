@@ -3,7 +3,7 @@
 open Parser        (* The type token is defined in parser.mli *)
 }
 rule token = parse
-    [' ' '\t' '\n']     { token lexbuf }
+    [' ' '\t' '\r' '\n']     { token lexbuf }
     | "int"             { INT }
     | "if"              { IF }
     | "else"            { ELSE }
@@ -26,6 +26,8 @@ rule token = parse
     | ":"               { COLON }
     | "{"               { RBRACE }
     | "}"               { LBRACE }
+    | "<"               { LT }
+    | ">"               { GT }
     | "<="              { LE_OP }
     | ">="              { GE_OP }
     | "=="              { EQ_OP }

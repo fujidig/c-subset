@@ -5,7 +5,7 @@ open Ast
 %}
 
 %token RPAREN LPAREN COMMA PLUS MINUS ASTERISK SLASH PERCENT
-%token EQUAL SEMICOLON COLON RBRACE LBRACE
+%token EQUAL SEMICOLON COLON RBRACE LBRACE LT GT
 %token <string> IDENTIFIER
 %token <int> CONSTANT
 %token LE_OP GE_OP EQ_OP NE_OP
@@ -57,8 +57,8 @@ additive_expression
 
 relational_expression
     : additive_expression { $1 }
-    | relational_expression '<' additive_expression { Lt ($1, $3) }
-    | relational_expression '>' additive_expression { Gt ($1, $3) }
+    | relational_expression LT additive_expression { Lt ($1, $3) }
+    | relational_expression GT additive_expression { Gt ($1, $3) }
     | relational_expression LE_OP additive_expression { Lteq ($1, $3) }
     | relational_expression GE_OP additive_expression { Gteq ($1, $3) }
     ;
@@ -80,12 +80,17 @@ expression
 
 declaration
     : type_specifier SEMICOLON { [] }
-    | type_specifier declarator_list SEMICOLON { $2 }
+    | type_specifier init_declarator_list SEMICOLON { $2 }
     ;
 
-declarator_list
-    : declarator { [($1, Constant 0)] }
-    | declarator_list COMMA declarator { $1 @ [($3, Constant 0)] }
+init_declarator_list
+    : init_declarator { [$1] }
+    | init_declarator_list COMMA init_declarator { $1 @ [$3] }
+    ;
+
+init_declarator
+    : declarator { ($1, Constant 0) }
+    | declarator EQUAL expression { ($1, $3) }
     ;
 
 type_specifier

@@ -1,9 +1,11 @@
 ocamllex lexer.mll
 ocamlyacc parser.mly
+
 ocamlc -c ast.mli
 ocamlc -c ast.ml
 ocamlc -c parser.mli
 ocamlc -c lexer.ml
 ocamlc -c parser.ml
+ocamlc -c eval.ml
 ocamlc -c calc.ml
-ocamlc -o calc ast.cmo lexer.cmo parser.cmo calc.cmo
+ocamlc -o calc ast.cmo lexer.cmo parser.cmo eval.cmo calc.cmo
