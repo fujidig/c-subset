@@ -12,7 +12,7 @@ rule token = parse
     | "return"          { RETURN }
     | ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '_']*
                         { IDENTIFIER (Lexing.lexeme lexbuf) }
-    | ['0'-'9']+        { CONSTANT }
+    | ['0'-'9']+        { CONSTANT (int_of_string (Lexing.lexeme lexbuf)) }
     | "("               { RPAREN }
     | ")"               { LPAREN }
     | ","               { COMMA }
