@@ -2,12 +2,13 @@
 
 %{
 open Ast
+open Big_int
 %}
 
 %token RPAREN LPAREN COMMA PLUS MINUS ASTERISK SLASH PERCENT
 %token EQUAL SEMICOLON COLON RBRACE LBRACE LT GT
 %token <string> IDENTIFIER
-%token <int> CONSTANT
+%token <Big_int.big_int> CONSTANT
 %token LE_OP GE_OP EQ_OP NE_OP
 %token INT
 %token IF ELSE WHILE GOTO RETURN
@@ -89,7 +90,7 @@ init_declarator_list
     ;
 
 init_declarator
-    : declarator { ($1, Constant 0) }
+    : declarator { ($1, Constant zero_big_int) }
     | declarator EQUAL expression { ($1, $3) }
     ;
 
@@ -170,7 +171,7 @@ iteration_statement
     ;
 
 jump_statement
-    : RETURN SEMICOLON { Return (Constant 0) }
+    : RETURN SEMICOLON { Return (Constant zero_big_int) }
     | RETURN expression SEMICOLON { Return $2 }
     ;
 

@@ -1,22 +1,11 @@
 let src = "\
 int print(int);
 
-int isprime(int n) {
-    int i = 2;
-    if (n < 2) return 0;
-    while (i < n) {
-        if (n % i == 0) return 0;
-        i = i + 1;
-    }
-    return 1;
-}
-
 int main() {
-    int i = 1;
-    while (i <= 100) {
-        if (isprime(i)) {
-            print(i);
-        }
+    int i = 1, prod = 1;
+    while (i <= 30) {
+        print(prod);
+        prod = prod * i;
         i = i + 1;
     }
 }

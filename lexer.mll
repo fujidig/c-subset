@@ -1,6 +1,6 @@
-(* File lexer.mll *)
 {
-open Parser        (* The type token is defined in parser.mli *)
+open Parser
+open Big_int
 }
 rule token = parse
     [' ' '\t' '\r' '\n']     { token lexbuf }
@@ -12,7 +12,7 @@ rule token = parse
     | "return"          { RETURN }
     | ['a'-'z' 'A'-'Z' '_'] ['a'-'z' 'A'-'Z' '_']*
                         { IDENTIFIER (Lexing.lexeme lexbuf) }
-    | ['0'-'9']+        { CONSTANT (int_of_string (Lexing.lexeme lexbuf)) }
+    | ['0'-'9']+        { CONSTANT (big_int_of_string (Lexing.lexeme lexbuf)) }
     | "("               { RPAREN }
     | ")"               { LPAREN }
     | ","               { COMMA }

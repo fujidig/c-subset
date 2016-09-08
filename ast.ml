@@ -1,5 +1,5 @@
 type expr =
-  Constant of int
+  Constant of Big_int.big_int
 | Identifier of string
 | Call of string * expr list
 | UnalyPlus of expr

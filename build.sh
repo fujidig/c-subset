@@ -3,9 +3,9 @@ ocamlyacc parser.mly
 
 ocamlc -c ast.mli
 ocamlc -c ast.ml
-ocamlc -c parser.mli
-ocamlc -c lexer.ml
-ocamlc -c parser.ml
-ocamlc -c eval.ml
+ocamlc -c nums.cma parser.mli
+ocamlc -c nums.cma lexer.ml
+ocamlc -c nums.cma parser.ml
+ocamlc -c nums.cma eval.ml
 ocamlc -c calc.ml
-ocamlc -o calc ast.cmo lexer.cmo parser.cmo eval.cmo calc.cmo
+ocamlc -o calc nums.cma ast.cmo lexer.cmo parser.cmo eval.cmo calc.cmo
